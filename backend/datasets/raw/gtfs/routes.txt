@@ -1,0 +1,11 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+TNSTC_77,TNSTC_MDU,77,Periyar Bus Stand to Thirunagar via Thirupparankundram,3,0055A5,FFFFFF
+TNSTC_48,TNSTC_MDU,48,Mattuthavani (MGR Terminus) to Thirumangalam via Palanganatham,3,D32F2F,FFFFFF
+TNSTC_70,TNSTC_MDU,70,Mattuthavani (MGR Terminus) to Arapalayam via Goripalayam,3,388E3C,FFFFFF
+TNSTC_23,TNSTC_MDU,23,Periyar Bus Stand to Viraganoor Ring Road via Teppakulam,3,F57C00,FFFFFF
+TNSTC_11,TNSTC_MDU,11,Periyar Bus Stand to Othakadai High Court Bench via Tallakulam,3,7B1FA2,FFFFFF
+TNSTC_3,TNSTC_MDU,3,Mattuthavani to Villapuram / Avaniyapuram via South Gate,3,0288D1,FFFFFF
+TNSTC_45,TNSTC_MDU,45,Periyar Bus Stand to Alagar Kovil via Appanthirupathi,3,E64A19,FFFFFF
+TNSTC_54,TNSTC_MDU,54,Arapalayam Bus Stand to Vadipatti via Samayanallur,3,512DA8,FFFFFF
+TNSTC_99,TNSTC_MDU,99,Mattuthavani to AIIMS Thoppur via Ring Road & Airport,3,00796B,FFFFFF
+TNSTC_102,TNSTC_MDU,102,Periyar Bus Stand to Sholavandan via Arapalayam & Nagamalai,3,C2185B,FFFFFF

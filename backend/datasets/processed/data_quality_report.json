@@ -1,0 +1,24 @@
+{
+  "total_raw_observations": 26040,
+  "valid_observations_count": 25577,
+  "rejected_observations_count": 463,
+  "validity_percentage": 98.22,
+  "rejection_percentage": 1.78,
+  "rejection_breakdown": {
+    "MISSING_ACTUAL_TIME": 390,
+    "INVALID_STOP_ID": 73
+  },
+  "date_range": {
+    "start": "2026-10-01",
+    "end": "2026-10-30"
+  },
+  "monitored_routes_count": 10,
+  "monitored_stops_count": 32,
+  "on_time_performance_baseline": {
+    "on_time_pct": 49.62,
+    "delayed_pct": 50.19,
+    "early_pct": 0.19,
+    "average_delay_minutes": 5.86,
+    "median_delay_minutes": 5.1
+  }
+}

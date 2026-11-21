@@ -1,0 +1,4 @@
+observation_id,trip_id,route_id,stop_id,scheduled_arrival_time,actual_arrival_time,observation_date,vehicle_id,observation_source,weather_condition,observer_notes
+OBS_TMPL_001,TRIP_TNSTC_77_03,TNSTC_77,ST_MDU_PERIYAR,08:00:00,08:03:30,2026-11-20,TN-58-N-4215,MANUAL_OBSERVER,CLEAR,Heavy student boarding for Thirupparankundram colleges
+OBS_TMPL_002,TRIP_TNSTC_48_03,TNSTC_48,ST_MDU_GORIPALAYAM,08:35:00,08:48:15,2026-11-20,TN-58-N-4215,MANUAL_OBSERVER,CLEAR,Goripalayam junction signal bottleneck
+OBS_TMPL_003,TRIP_TNSTC_70_04,TNSTC_70,ST_MDU_SIMMAKKAL,08:54:00,09:06:20,2026-11-20,TN-58-N-8812,MANUAL_OBSERVER,RAIN,North Chitrai street market congestion

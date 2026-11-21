@@ -1,0 +1,1247 @@
+/* ==========================================================================
+   TransitPulse - Modern Glassmorphism & Transit Motion Design System
+   Madurai District Public Bus Delay Intelligence & Route Reliability Platform
+   ========================================================================== */
+
+:root {
+  /* Brand Palette */
+  --tp-primary: #1d4ed8;
+  --tp-primary-hover: #1e40af;
+  --tp-primary-light: rgba(37, 99, 235, 0.1);
+  --tp-cyan: #06b6d4;
+  --tp-emerald: #10b981;
+  --tp-amber: #f59e0b;
+  --tp-rose: #ef4444;
+  --tp-indigo: #6366f1;
+
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-hover: rgba(255, 255, 255, 0.86);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.52);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-border-subtle: rgba(226, 232, 240, 0.65);
+  --glass-border-focus: rgba(37, 99, 235, 0.45);
+  --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.65);
+  --glass-shadow-hover: 0 20px 35px -8px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(37, 99, 235, 0.25);
+  --glass-blur: blur(14px) saturate(180%);
+  --glass-blur-deep: blur(24px) saturate(200%);
+
+  /* Typography & Theme */
+  --tp-text-title: #0f172a;
+  --tp-text-body: #334155;
+  --tp-text-muted: #64748b;
+  --tp-radius-sm: 8px;
+  --tp-radius-md: 14px;
+  --tp-radius-lg: 20px;
+  --tp-radius-full: 9999px;
+  --tp-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Layout & Dynamic Ambient Lighting */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f8fafc;
+  color: var(--tp-text-body);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.07) 0px, transparent 45%),
+    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.06) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+.app-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fixed Ambient Lighting Blobs */
+.ambient-blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(85px);
+  z-index: 0;
+  opacity: 0.55;
+  animation: pulseBlob 12s ease-in-out infinite alternate;
+}
+
+.ambient-blob-1 {
+  top: -8%;
+  left: 8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, rgba(6, 182, 212, 0.08) 70%, transparent 100%);
+  animation-duration: 14s;
+}
+
+.ambient-blob-2 {
+  top: 35%;
+  right: -5%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.06) 70%, transparent 100%);
+  animation-duration: 18s;
+  animation-delay: -5s;
+}
+
+.ambient-blob-3 {
+  bottom: 5%;
+  left: 20%;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(244, 63, 94, 0.05) 70%, transparent 100%);
+  animation-duration: 16s;
+  animation-delay: -9s;
+}
+
+@keyframes pulseBlob {
+  0% { transform: scale(1) translate(0px, 0px); }
+  50% { transform: scale(1.1) translate(25px, -20px); }
+  100% { transform: scale(0.95) translate(-15px, 25px); }
+}
+
+/* ==========================================================================
+   Glassmorphism Navbar
+   ========================================================================== */
+.navbar-transitpulse {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  transition: var(--tp-transition);
+  z-index: 1030;
+}
+
+.navbar-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.brand-bus-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35);
+  transition: var(--tp-transition);
+}
+
+.navbar-brand-logo:hover .brand-bus-icon-wrapper {
+  transform: rotate(-6deg) scale(1.05);
+  box-shadow: 0 6px 16px rgba(29, 78, 216, 0.45);
+}
+
+.brand-title {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--tp-text-title);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.brand-highlight {
+  color: var(--tp-primary);
+  background: linear-gradient(135deg, #1d4ed8, #0284c7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tp-text-muted);
+}
+
+/* Live Pulse Beacon Badge */
+.live-pulse-pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--tp-radius-full);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #065f46;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pulse-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--tp-emerald);
+  position: relative;
+  display: inline-block;
+}
+
+.pulse-beacon::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--tp-emerald);
+  animation: pulseBeacon 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes pulseBeacon {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.nav-link-tp {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--tp-text-body) !important;
+  padding: 0.45rem 0.85rem !important;
+  border-radius: var(--tp-radius-md);
+  transition: var(--tp-transition);
+}
+
+.nav-link-tp:hover, .nav-link-tp.active {
+  color: var(--tp-primary) !important;
+  background: rgba(37, 99, 235, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Hero Section with Transit Motion Graphics
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  background: transparent;
+  padding: 4.5rem 0 3.5rem;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(241, 245, 249, 0.3) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-weight: 850;
+  color: var(--tp-text-title);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.12rem;
+  color: var(--tp-text-muted);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Glassmorphic Cards & Panels
+   ========================================================================== */
+.tp-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  box-shadow: var(--glass-shadow);
+  transition: var(--tp-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.tp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.tp-card:hover {
+  transform: translateY(-4px);
+  background: var(--glass-bg-hover);
+  box-shadow: var(--glass-shadow-hover);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.search-box-container {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: var(--glass-blur-deep);
+  -webkit-backdrop-filter: var(--glass-blur-deep);
+  padding: 1.85rem;
+  border-radius: var(--tp-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.9);
+  transition: var(--tp-transition);
+}
+
+.search-box-container:hover {
+  box-shadow: 0 22px 50px -12px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.3);
+}
+
+/* Metric Cards */
+.metric-card-val {
+  font-size: 1.95rem;
+  font-weight: 800;
+  color: var(--tp-text-title);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.metric-card-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tp-text-muted);
+}
+
+/* Form Controls & Inputs */
+.form-control, .form-select {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid var(--glass-border-subtle) !important;
+  border-radius: var(--tp-radius-md) !important;
+  color: var(--tp-text-title) !important;
+  padding: 0.65rem 0.9rem !important;
+  font-size: 0.92rem !important;
+  transition: var(--tp-transition) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #ffffff !important;
+  border-color: var(--tp-primary) !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15), inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Modern Gradient Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important;
+  border: none !important;
+  border-radius: var(--tp-radius-md) !important;
+  font-weight: 600 !important;
+  padding: 0.55rem 1.25rem !important;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.28) !important;
+  transition: var(--tp-transition) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4) !important;
+}
+
+.btn-outline-primary {
+  background: rgba(37, 99, 235, 0.05) !important;
+  border: 1px solid rgba(37, 99, 235, 0.4) !important;
+  color: var(--tp-primary) !important;
+  border-radius: var(--tp-radius-md) !important;
+  font-weight: 600 !important;
+  transition: var(--tp-transition) !important;
+}
+
+.btn-outline-primary:hover {
+  background: var(--tp-primary) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ==========================================================================
+   Glassmorphic Badges & Reliability Indicators
+   ========================================================================== */
+.glass-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--tp-radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: var(--tp-transition);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.badge-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badge-tier-excellent {
+  background: rgba(220, 252, 231, 0.85);
+  color: #15803d;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.badge-tier-good {
+  background: rgba(224, 242, 254, 0.85);
+  color: #0369a1;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+}
+
+.badge-tier-moderate {
+  background: rgba(254, 243, 199, 0.85);
+  color: #b45309;
+  border: 1px solid rgba(251, 191, 36, 0.5);
+}
+
+.badge-tier-poor {
+  background: rgba(254, 226, 226, 0.85);
+  color: #b91c1c;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+}
+
+/* Stop Sequence Badges */
+.stop-sequence-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(2, 132, 199, 0.15) 100%);
+  color: var(--tp-primary);
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.1);
+}
+
+/* Tables in Glass Cards */
+.table {
+  --bs-table-bg: transparent !important;
+  color: var(--tp-text-body);
+}
+
+.table th {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tp-text-muted);
+  border-bottom: 1.5px solid rgba(226, 232, 240, 0.8);
+  padding: 0.85rem 0.75rem;
+}
+
+.table td {
+  padding: 0.85rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(37, 99, 235, 0.03) !important;
+}
+
+/* Glassmorphism Footer & Responsive Styling */
+.footer-tp {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  padding: 3.25rem 0 1.75rem;
+  font-size: 0.9rem;
+  color: var(--tp-text-muted);
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+}
+
+.brand-bus-icon-wrapper-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.25);
+  flex-shrink: 0;
+}
+
+.footer-badge-year {
+  background-color: rgba(37, 99, 235, 0.1) !important;
+  color: var(--tp-primary) !important;
+  border: 1px solid rgba(37, 99, 235, 0.25) !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.5px;
+  padding: 0.3rem 0.55rem !important;
+  border-radius: var(--tp-radius-sm) !important;
+}
+
+.footer-link {
+  color: var(--tp-text-muted);
+  text-decoration: none;
+  transition: var(--tp-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-link:hover {
+  color: var(--tp-primary);
+  transform: translateX(4px);
+}
+
+.letter-spacing-1 {
+  letter-spacing: 0.75px;
+}
+
+/* Mobile & Tablet Responsiveness for All Screens */
+@media (max-width: 767.98px) {
+  .footer-tp {
+    padding: 2.25rem 0 1.5rem;
+  }
+  .footer-bottom-bar {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .footer-tp {
+    text-align: center;
+  }
+  .footer-tp .footer-brand-wrapper,
+  .footer-tp .footer-subtext {
+    justify-content: center;
+  }
+  .footer-tp ul {
+    align-items: center;
+  }
+  .footer-tp .footer-link:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Page Animations & Motion Enhancements
+   ========================================================================== */
+.container {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Dropdown Menu Glass Styling */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: var(--glass-blur-deep) !important;
+  -webkit-backdrop-filter: var(--glass-blur-deep) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--tp-radius-md) !important;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12) !important;
+  padding: 0.5rem !important;
+}
+
+.dropdown-item {
+  border-radius: var(--tp-radius-sm) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  transition: var(--tp-transition) !important;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  color: var(--tp-primary) !important;
+}
+
+/* ==========================================================================
+   TransitPulse Landing Page High-Impact Glassmorphic Styles
+   ========================================================================== */
+.landing-hero-section {
+  padding: 5rem 0 4rem;
+  position: relative;
+}
+
+.landing-hero-title {
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--tp-text-title);
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 70%, #0369a1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-hero-subtitle {
+  max-width: 650px;
+}
+
+.glass-badge-pill {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--tp-text-body) !important;
+  transition: var(--tp-transition) !important;
+}
+
+.glass-btn:hover {
+  background: #ffffff !important;
+  border-color: var(--tp-primary) !important;
+  color: var(--tp-primary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+.landing-search-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: var(--glass-blur-deep);
+  -webkit-backdrop-filter: var(--glass-blur-deep);
+  padding: 2rem;
+  border-radius: var(--tp-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  position: relative;
+  transition: var(--tp-transition);
+}
+
+.landing-search-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -10px rgba(37, 99, 235, 0.16), 0 0 0 1px rgba(37, 99, 235, 0.3);
+}
+
+/* Featured Corridor Cards */
+.corridor-card-showcase {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  box-shadow: var(--glass-shadow);
+  transition: var(--tp-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.corridor-card-showcase:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.badge-route-number {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
+}
+
+/* Feature Capabilities Cards */
+.feature-card-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.05);
+  transition: var(--tp-transition);
+}
+
+.feature-card-glass:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.feature-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--tp-transition);
+}
+
+.feature-card-glass:hover .feature-icon-wrapper {
+  transform: scale(1.08) rotate(-4deg);
+  background: rgba(37, 99, 235, 0.14);
+}
+
+/* Pipeline Step Cards */
+.pipeline-step-card {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  position: relative;
+  transition: var(--tp-transition);
+}
+
+.pipeline-step-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.pipeline-step-number {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 850;
+  color: var(--tp-primary);
+  background: rgba(37, 99, 235, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* Official Report Download CTA Banner */
+.download-cta-banner {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0284c7 100%);
+  border-radius: var(--tp-radius-lg);
+  box-shadow: 0 25px 60px -15px rgba(29, 78, 216, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.download-cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Layout Utilities */
+.max-w-700 {
+  max-width: 700px;
+}
+
+.max-w-650 {
+  max-width: 650px;
+}
+
+.fw-black {
+  font-weight: 900;
+}
+
+.text-indigo {
+  color: var(--tp-indigo) !important;
+}
+
+/* ==========================================================================
+   Dashboard Page & Interactive Next-Pages Navigation Hub
+   ========================================================================== */
+.dashboard-header-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: var(--glass-blur-deep);
+  -webkit-backdrop-filter: var(--glass-blur-deep);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hub-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  transition: var(--tp-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hub-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--tp-primary), transparent);
+  opacity: 0;
+  transition: var(--tp-transition);
+}
+
+.dashboard-hub-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.12);
+}
+
+.dashboard-hub-card:hover::before {
+  opacity: 1;
+}
+
+.hub-icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--tp-transition);
+}
+
+.dashboard-hub-card:hover .hub-icon-circle {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.hub-link-text {
+  transition: var(--tp-transition);
+}
+
+.dashboard-hub-card:hover .hub-link-text {
+  transform: translateX(3px);
+}
+
+/* Big Glowing Launch Dashboard Hero Button */
+.btn-launch-dashboard {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%) !important;
+  border: none !important;
+  border-radius: var(--tp-radius-full) !important;
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.35) !important;
+  transition: var(--tp-transition) !important;
+}
+
+.btn-launch-dashboard:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(29, 78, 216, 0.45) !important;
+}
+
+/* ==========================================================================
+   Modern Left Glassmorphic Sidebar Navigation (Side Navbar)
+   ========================================================================== */
+.tp-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 100vh;
+  z-index: 1040;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: var(--glass-blur-deep);
+  -webkit-backdrop-filter: var(--glass-blur-deep);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 992px) {
+  .app-main-with-sidebar {
+    margin-left: 270px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .tp-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.15);
+  }
+  .tp-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+  .app-main-with-sidebar {
+    margin-left: 0;
+  }
+}
+
+.sidebar-mobile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1035;
+}
+
+.sidebar-mobile-topbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--glass-blur);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.sidebar-brand-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--tp-text-title);
+  letter-spacing: -0.02em;
+}
+
+.sidebar-brand-sub {
+  font-size: 0.72rem;
+  color: var(--tp-text-muted);
+  font-weight: 600;
+}
+
+.sidebar-section-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--tp-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--tp-radius-md);
+  color: var(--tp-text-body);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--tp-transition);
+  position: relative;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--tp-primary);
+  transform: translateX(3px);
+}
+
+.sidebar-nav-item.active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.14) 0%, rgba(6, 182, 212, 0.08) 100%);
+  color: var(--tp-primary);
+  font-weight: 700;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 4px;
+  background: var(--tp-primary);
+}
+
+.sidebar-nav-arrow {
+  opacity: 0.4;
+  transition: var(--tp-transition);
+}
+
+.sidebar-nav-item:hover .sidebar-nav-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.sidebar-landing-btn {
+  background: rgba(241, 245, 249, 0.75);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--tp-radius-sm);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--tp-text-muted);
+  transition: var(--tp-transition);
+}
+
+.sidebar-landing-btn:hover {
+  background: #ffffff;
+  color: var(--tp-primary);
+  border-color: var(--tp-primary);
+}
+
+/* ==========================================================================
+   Live Bus Moving & Time Delay Animation Widget Styles
+   ========================================================================== */
+.bus-delay-animator-box {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--tp-radius-md);
+  padding: 0.85rem;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.animator-compact {
+  padding: 0.7rem;
+}
+
+.pulse-beacon-sm {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tp-emerald);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseSm 1.8s infinite;
+  display: inline-block;
+}
+
+@keyframes pulseSm {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.animator-label {
+  font-size: 0.68rem;
+  color: var(--tp-text-title);
+}
+
+.anim-status-badge {
+  font-size: 0.68rem !important;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+/* Road Lane & Moving Bus */
+.transit-road-container {
+  margin: 0.5rem 0;
+}
+
+.transit-road-track {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 8px;
+  position: relative;
+  height: 46px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.road-dashed-lines {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #e2e8f0 0, #e2e8f0 10px, transparent 10px, transparent 20px);
+  transform: translateY(-50%);
+  opacity: 0.45;
+  animation: roadStripes 2s linear infinite;
+}
+
+@keyframes roadStripes {
+  from { background-position: 0 0; }
+  to { background-position: -40px 0; }
+}
+
+.road-stop-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.road-stop-marker.stop-1 { left: 12%; }
+.road-stop-marker.stop-2 { left: 52%; }
+.road-stop-marker.stop-3 { left: 88%; }
+
+.stop-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #64748b;
+  border: 1px solid #ffffff;
+  transition: var(--tp-transition);
+}
+
+.road-stop-marker.reached .stop-dot {
+  background: var(--tp-emerald);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.stop-dot.choke-point {
+  background: var(--tp-amber);
+}
+
+.road-stop-marker.reached .stop-dot.choke-point {
+  background: var(--tp-rose);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+.stop-tag {
+  font-size: 0.58rem;
+  color: #94a3b8;
+  position: absolute;
+  top: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Bus Container on Track */
+.transit-animated-bus {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  transition: left 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bus-svg-wrapper {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  animation: busRumble 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes busRumble {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-1px); }
+}
+
+.headlight-beam {
+  animation: headlightPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes headlightPulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; filter: drop-shadow(0 0 3px #fef08a); }
+}
+
+.bus-delay-bubble {
+  position: absolute;
+  top: -16px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  animation: bubbleFloat 1.5s ease-in-out infinite alternate;
+}
+
+.delay-bubble-success {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.delay-bubble-warning {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.delay-bubble-danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+/* Comparison Time Cell Grid */
+.time-comparison-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(241, 245, 249, 0.65);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border-subtle);
+}
+
+.time-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-cell-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.time-cell-val {
+  font-size: 0.78rem;
+  font-family: monospace;
+}
+
+.time-cell-arrow {
+  font-weight: bold;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.micro-text {
+  font-size: 0.68rem;
+}
